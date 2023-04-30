@@ -3,6 +3,7 @@ from flask_restful import Resource
 from models import LikePost, db
 import json
 import flask_jwt_extended
+from views import get_authorized_user_ids
 
 class PostLikesListEndpoint(Resource):
 
@@ -17,7 +18,7 @@ class PostLikesListEndpoint(Resource):
         try:
             post_id = int(body.get('post_id'))
         except:
-            return Response(json.dumps({'error': 'post_id format incorrect'}), status=400) 
+            return Response(json.dumps({'error': 'incorrect'}), status=400) 
 
         post = Post.query.get(post_id)
 
@@ -25,10 +26,10 @@ class PostLikesListEndpoint(Resource):
         authorized_ids = get_authorized_user_ids(current_user=self.current_user)
 
         if post == None:
-            return Response(json.dumps({ "error": "post_id not valid" }), mimetype="application/json", status=404)
+            return Response(json.dumps({ "error": "not valid" }), mimetype="application/json", status=404)
 
         if post.user_id not in authorized_ids:
-            return Response(json.dumps({ "error": "post_id not valid or is unauthorized" }), mimetype="application/json", status=404)
+            return Response(json.dumps({ "error": " not valid" }), mimetype="application/json", status=404)
 
         like_post = LikePost(
             user_id=self.current_user.id,
@@ -38,7 +39,7 @@ class PostLikesListEndpoint(Resource):
             db.session.add(like_post)
             db.session.commit()
         except:
-            return Response(json.dumps({ "error": "duplicate post_id" }), mimetype="application/json", status=400)
+            return Response(json.dumps({ "error": "not valid" }), mimetype="application/json", status=400)
 
         return Response(json.dumps(like_post.to_dict()), mimetype="application/json", status=201)
 
@@ -56,12 +57,12 @@ class PostLikesDetailEndpoint(Resource):
         try:
             id = int(id)
         except:
-            return Response(json.dumps({'error': 'like_post_id format incorrect'}), status=404)
+            return Response(json.dumps({'error': 'not valid'}), status=404)
 
         like_post = LikePost.query.get(id)
 
         if like_post == None or like_post.user_id != self.current_user.id:
-            return Response(json.dumps({ "error": "like_post_user_id not valid or is unauthorized" }), mimetype="application/json", status=404)
+            return Response(json.dumps({ "error": " not valid" }), mimetype="application/json", status=404)
 
         LikePost.query.filter_by(id=id).delete()
         db.session.commit()

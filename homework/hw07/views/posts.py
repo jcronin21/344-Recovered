@@ -2,7 +2,7 @@ from flask import Response, request
 from flask_restful import Resource
 from models import Post, Following, db
 from views import get_authorized_user_ids
-import access_utils
+
 import flask_jwt_extended
 
 import json

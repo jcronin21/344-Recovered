@@ -3,6 +3,7 @@ from flask_restful import Resource
 from models import Following, User, db
 import json
 import flask_jwt_extended
+from views import get_authorized_user_ids
 
 
 def get_path():
@@ -29,7 +30,7 @@ class FollowingListEndpoint(Resource):
         try:
             following_id = int(body.get('user_id'))
         except:
-            return Response(json.dumps({'error': 'user_id format incorrect'}), status=400) 
+            return Response(json.dumps({'error': 'incorrect'}), status=400) 
         
         user = User.query.get(following_id)
     
@@ -61,7 +62,7 @@ class FollowingDetailEndpoint(Resource):
         following = Following.query.get(id)
     
         if following == None or following.user_id != self.current_user.id:
-            return Response(json.dumps({ "error": "follow_user_id not valid or is unauthorized" }), mimetype="application/json", status=404)
+            return Response(json.dumps({ "error": "unauthorized" }), mimetype="application/json", status=404)
 
         Following.query.filter_by(id=id).delete()
         db.session.commit()
