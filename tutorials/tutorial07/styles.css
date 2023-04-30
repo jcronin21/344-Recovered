@@ -1,0 +1,93 @@
+body * {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Replace with your HW2 CSS */
+
+
+main {
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#stories {
+    display: flex;
+    column-gap: 20px;
+    overflow: hidden;
+    padding: 10px;
+    border: solid 1px #CCC;
+    background-color: white;
+    margin: 20px 0;
+}
+
+#stories, #posts {
+    width: 80%;
+    min-width: 500px;
+}
+
+.story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.story img {
+    border-radius: 50%;
+    width: 50px;
+    border: solid 3px #DDD;
+}
+
+.story  p {
+    width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    text-align: center;
+    font-size: 0.7em;
+    margin: 3px;
+    color: #999;
+}
+
+.post {
+    border: solid 1px #CCC;
+    margin-bottom: 50px;
+    background-color: white;
+    padding-bottom: 15px;
+}
+
+.post img {
+    width: 100%;
+}
+
+.post p, .post section, .post div {
+    padding: 0 10px;
+}
+
+aside {
+    position: fixed;
+    top: 50px;
+    left: 65vw;
+}
+
+
+@media screen and (max-width: 800px) {
+    aside {
+        display: none;
+    }
+    main {
+        width: 100%;
+        padding: 0px 30px;
+    }
+
+    #stories, #posts {
+        width: 100%;
+        min-width: 100%;
+    }
+}

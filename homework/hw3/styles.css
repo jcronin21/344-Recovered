@@ -1,0 +1,65 @@
+:root {
+    --button-size: 40px;
+    --item-width: 55vw; /* feel free to adjust (and also adjust in the javascript */
+    --button-offset: -23vw; /* feel free to adjust */
+}
+
+body > * {
+    box-sizing: border-box;
+}
+
+h1, p {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Window */
+.carousel {
+    display: flex;
+    width: var(--item-width);  
+    margin: 0 auto;
+    overflow: hidden; 
+    border: solid 1px #CCC;
+    flex-direction: column;
+}
+
+
+/* Inner Slider */
+.carousel-inner {
+    display: flex;
+    position: relative;
+    left: 0px;
+    width: 100%;
+    transition: left 0.3s ease-in;
+    margin-bottom: calc(-1 * var(--button-size));
+}
+
+/* Slide formatting */
+.slide img {
+    width: var(--item-width);
+}
+.slide p {
+    padding: 10px;
+}
+
+/* button formatting */
+button {
+    display: flex;
+    position: relative;
+    top: var(--button-offset);
+    border: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: var(--button-size);
+    height: var(--button-size);
+    justify-content: center;
+    align-items: center;
+}
+
+.back {
+    align-self: start;
+}
+
+.forward {
+    align-self: end;
+    margin-top: calc(-1 * var(--button-size));
+}

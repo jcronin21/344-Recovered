@@ -1,0 +1,23 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+nav{
+    display: flex;
+}
+ul{
+
+    display: flex;
+    align-items:flex-end;
+    justify-content: space-between;
+    width: 10px;
+    
+}

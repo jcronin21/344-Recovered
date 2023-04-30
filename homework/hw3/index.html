@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="carousel.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <title>Carousel</title>
+</head>
+<body>
+    <h1>Your Carousel</h1>
+    <div class="carousel" aria-label="Photo Carousel">
+
+        <div class="carousel-inner">
+            <!-- Insert images here -->
+            <script>
+                const data = [
+                  {
+                    image_url: "https://picsum.photos/450/300?n=1",
+                    caption: "Photo 1",
+                  },
+                  {
+                    image_url: "https://picsum.photos/450/300?n=2",
+                    caption: "Photo 2",
+                  },
+                  {
+                    image_url: "https://picsum.photos/450/300?n=3",
+                    caption: "Photo 3",
+                  },
+                  {
+                    image_url: "https://picsum.photos/450/300?n=4",
+                    caption: "Photo 4",
+                  },
+                  {
+                    image_url: "https://picsum.photos/450/300?n=5",
+                    caption: "Photo 5",
+                  },
+                  {
+                    image_url: "https://picsum.photos/450/300?n=6",
+                    caption: "Photo 6",
+                  },
+                  {
+                    image_url: "https://picsum.photos/450/300?n=7",
+                    caption: "Photo 7",
+                  },
+                  {
+                    image_url: "https://picsum.photos/450/300?n=8",
+                    caption: "Photo 8",
+                  },
+                  {
+                    image_url: "https://picsum.photos/450/300?n=9",
+                    caption: "Photo 9",
+                  },
+                  {
+                    image_url: "https://picsum.photos/450/300?n=10",
+                    caption: "Photo 10",
+                  }
+                ];
+
+                const carouselInner = document.querySelector('.carousel-inner');
+                data.forEach((photo, index) => {
+                    const slide = `
+                        <section role="group" aria-label="slide ${index + 1} of ${data.length}">
+                            <img src="${photo.image_url}" alt="${photo.caption}">
+                        </section>
+                    `;
+                    carouselInner.insertAdjacentHTML('beforeend', slide);
+                });
+            </script>
+        </div> 
+
+        <button class="back" aria-label="Show previous slide">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <button class="forward" aria-label="Show next slide">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        
+        <script src="carousel.js" defer></script>
+    </div>
+
+        </div> 
+
+        <button class="back" aria-label="Show previous slide">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <button class="forward" aria-label="Show next slide">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        
+    </div>
+    
+</body>
+</html>

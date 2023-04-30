@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: auto;
+}
+
+.page-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.carousel img {
+    width: 100%;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.row {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+    justify-content: start;
+}
+

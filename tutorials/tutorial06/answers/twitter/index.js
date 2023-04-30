@@ -1,0 +1,3 @@
+const rootURL="//www.apitutor.org/twitter/simple/1.1/search/tweets.json",showResults=async e=>{e.preventDefault();
+const t=document.querySelector("#term").value,o=document.querySelector("#result_type").value;let n=`${rootURL}?q=${t}&result_type=${o}`;
+const r=await fetch(n),s=await r.json();console.log(s),document.querySelector(".results").innerHTML="",document.querySelector(".results").insertAdjacentHTML("beforeend",s.map(tweetToHTML).join(""))},tweetToHTML=e=>`<section class="card"> <p>${e.text}</p> <p><strong>${e.screen_name}</strong></p> <p>Retweets: <strong>${e.retweet_count}</strong></p> </div></section>`;

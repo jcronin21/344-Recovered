@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card{
+     border: solid gray 1px;
+     width: 300px;
+}
+
+.card img{
+    width: 100%;
+}
+
+.card div{
+    padding:10px;
+}
+main{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+
+   
+}
