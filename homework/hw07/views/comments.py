@@ -2,6 +2,7 @@ from flask import Response, request
 from flask_restful import Resource
 import json
 from models import db, Comment, Post
+from views import get_authorized_user_ids
 import flask_jwt_extended
 
 class CommentListEndpoint(Resource):
@@ -18,7 +19,7 @@ class CommentListEndpoint(Resource):
         try:
             post_id = int(body.get('post_id'))
         except:
-            return Response(json.dumps({'error': 'post_id format incorrect'}), status=400)
+            return Response(json.dumps({'error': 'format error'}), status=400)
 
         post = Post.query.get(post_id)
         
@@ -28,7 +29,7 @@ class CommentListEndpoint(Resource):
             return Response(json.dumps({ "error": "post_id not valid or is unauthorized" }), mimetype="application/json", status=404)
         
         if not body.get('text'):
-            return Response(json.dumps({ "error": "missing text" }), mimetype="application/json", status=400)
+            return Response(json.dumps({ "error": "error" }), mimetype="application/json", status=400)
 
         new_comment = Comment(
             text=body.get('text'),
@@ -55,12 +56,12 @@ class CommentDetailEndpoint(Resource):
         try:
             id = int(id)
         except:
-            return Response(json.dumps({'error': 'comment_id format incorrect'}), status=404)
+            return Response(json.dumps({'error': 'incorrect'}), status=404)
 
         comment = Comment.query.get(id)
 
         if comment == None or comment.user_id != self.current_user.id:
-            return Response(json.dumps({ "error": "comment not valid or is unauthorized" }), mimetype="application/json", status=404)
+            return Response(json.dumps({ "error": "invalid" }), mimetype="application/json", status=404)
 
         Comment.query.filter_by(id=id).delete()
 
