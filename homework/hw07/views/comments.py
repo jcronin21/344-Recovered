@@ -21,6 +21,7 @@ class CommentListEndpoint(Resource):
             return Response(json.dumps({'error': 'post_id format incorrect'}), status=400)
 
         post = Post.query.get(post_id)
+        
         authorized_ids = get_authorized_user_ids(current_user=self.current_user)
 
         if post == None or post.user_id not in authorized_ids:
@@ -62,6 +63,8 @@ class CommentDetailEndpoint(Resource):
             return Response(json.dumps({ "error": "comment not valid or is unauthorized" }), mimetype="application/json", status=404)
 
         Comment.query.filter_by(id=id).delete()
+
+
         db.session.commit()
 
         return Response(json.dumps(None), mimetype="application/json", status=200)

@@ -20,6 +20,8 @@ class PostLikesListEndpoint(Resource):
             return Response(json.dumps({'error': 'post_id format incorrect'}), status=400) 
 
         post = Post.query.get(post_id)
+
+        
         authorized_ids = get_authorized_user_ids(current_user=self.current_user)
 
         if post == None:
