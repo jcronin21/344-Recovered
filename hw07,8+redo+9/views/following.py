@@ -19,14 +19,14 @@ class FollowingListEndpoint(Resource):
         self.current_user = current_user
     
     @flask_jwt_extended.jwt_required()
+
     def get(self):
-        # return all of the "following" records that the current user is following
         followings = Following.query.filter_by(user_id=self.current_user.id).all()
         return Response(json.dumps([following.to_dict_following() for following in followings]), mimetype="application/json", status=200)
 
     @flask_jwt_extended.jwt_required()
     def post(self):
-        # create a new "following" record based on the data posted in the body 
+
         body = request.get_json()
         if not body.get('user_id'):
             return Response(json.dumps({'error': 'retry'}), status=400)
@@ -53,7 +53,7 @@ class FollowingDetailEndpoint(Resource):
 
     @flask_jwt_extended.jwt_required()
     def delete(self, id):
-        # delete "following" record where "id"=id
+
         try :
             followingID=int(id)
             following=Following.query.get(id)
