@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    max-width: 800px;
+    margin: auto;
+}
+
+body * {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 10px;
+    padding: 20px 20px;
+    background: #F4F4F4;
+    border-radius: 4px;
+    border: solid 1px #DDD;
+    margin: 20px 0;
+}
+.search-form label {
+    justify-self: flex-end;
+    font-weight: 500;
+}
+
+.search-form button {
+    width: 200px;
+    grid-column: 2 / 3;
+    color: white;
+    padding: 5px 20px;
+    background-color: rgb(29, 155, 240);
+    border-color: white;
+    border-width: 0px;
+    border-radius: 15px;
+}
+
+.search-form input {
+    padding: 5px 10px;
+    list-style: 1.5em;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.search-form input, 
+.search-form button {
+    font-size: 1.1em;
+}
