@@ -2,9 +2,7 @@ import React from 'react';
 import NavLinks from './NavLinks';
 import Profile from './Profile.js';
 import Suggestions from './Suggestions';
-
 import Posts from './Posts';
-
 import { useState, useEffect } from "react";
 import {getHeaders} from './utils';
 
@@ -32,6 +30,7 @@ export default function App ({token}) {
             <nav className="main-nav">
                 <h1>Photo App</h1>
                 <NavLinks profile={profile} />
+                <Profile profile = {profile}/>
             </nav>
            
            {/* Right Panel */}

@@ -1,45 +1,44 @@
 import React from 'react';
 import {getHeaders} from './utils';
 
-export default function BookmarkButton({actualBookmark, post, token, requeryPost}) {
+export default function BookmarkButton({postId, bookmarkId, requeryPost, token}) {  
 
-    const bookmarkId = post.current_user_bookmark_id;
-    const postId = post.id;
-
-    async function bookmarkUnbookmark() {
-        if (bookmarkId) {
-            const response = await fetch(`/api/bookmarks/${bookmarkId}`, {
-                method: "DELETE",
-                headers: getHeaders(token)
-            });
-            const data = await response.json();
-            console.log(data);
-            requeryPost();
-        } else {
-            console.log('bookmark!')
-            const postData = {
-                "post_id": postId
-            };
-            const response = await fetch("/api/bookmarks/", {
-                method: "POST",
-                headers: getHeaders(token),
-                body: JSON.stringify(postData)
-            });
-            const data = await response.json();
-            console.log(data);
-            requeryPost();
-        }
+    function toggleBookmark(ev) {
+        bookmarkId ? unbookmark() : bookmark();
     }
 
-    // return some JSX:
+    function bookmark() {
+        fetch('/api/bookmarks', {
+                headers: getHeaders(token),
+                method: 'POST',
+                body: JSON.stringify({ post_id: postId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                requeryPost();
+            })
+    }
+
+    function unbookmark() {
+        fetch(`/api/bookmarks/${bookmarkId}`, {
+                headers: getHeaders(token),
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                requeryPost();
+            })
+    }
+
     return (
-    actualBookmark ? 
-    <button class="icon-button" aria-label="Bookmark Button" onClick={bookmarkUnbookmark} aria-checked="true">
-        <i class="fa-solid fa-bookmark"></i>
-    </button>
-    :
-    <button class="icon-button" aria-label="Bookmark Button" onClick={bookmarkUnbookmark} aria-checked="false">
-        <i class="fa-regular fa-bookmark"></i>
-    </button>
-    );
+        <button role="switch"
+            className="bookmark" 
+            aria-label="Bookmark Button" 
+            aria-checked={bookmarkId ? 'true' : 'false'}
+            onClick={toggleBookmark}>
+            <i className={bookmarkId ? 'fas fa-bookmark' : 'far fa-bookmark'}></i>
+        </button>
+    ) 
 }
