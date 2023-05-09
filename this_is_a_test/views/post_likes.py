@@ -4,6 +4,7 @@ from models import LikePost, db
 import json
 
 from views import can_view_post
+import flask_jwt_extended
 
 
 class PostLikesListEndpoint(Resource):
@@ -11,6 +12,7 @@ class PostLikesListEndpoint(Resource):
     def __init__(self, current_user):
         self.current_user = current_user
     
+    @flask_jwt_extended.jwt_required()
     def post(self):
 
         body = request.get_json()
@@ -41,6 +43,7 @@ class PostLikesDetailEndpoint(Resource):
     def __init__(self, current_user):
         self.current_user = current_user
     
+    @flask_jwt_extended.jwt_required()
     def delete(self, id):
 
         print(id)
@@ -60,12 +63,12 @@ def initialize_routes(api):
         PostLikesListEndpoint, 
         '/api/posts/likes', 
         '/api/posts/likes/', 
-        resource_class_kwargs={'current_user': api.app.current_user}
+        resource_class_kwargs={'current_user': flask_jwt_extended.current_user}
     )
 
     api.add_resource(
         PostLikesDetailEndpoint, 
         '/api/posts/likes/<int:id>', 
         '/api/posts/likes/<int:id>/',
-        resource_class_kwargs={'current_user': api.app.current_user}
+        resource_class_kwargs={'current_user': flask_jwt_extended.current_user}
     )

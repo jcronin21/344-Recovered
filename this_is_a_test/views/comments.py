@@ -3,14 +3,16 @@ from flask_restful import Resource
 import json
 from models import db, Comment, Post
 from views import get_authorized_user_ids, can_view_post
-
+import flask_jwt_extended
 
 class CommentListEndpoint(Resource):
 
+    @flask_jwt_extended.jwt_required()
     def __init__(self, current_user):
         self.current_user = current_user
         self.user_ids = get_authorized_user_ids(self.current_user)
-    
+
+    @flask_jwt_extended.jwt_required()
     def post(self):
         # create a new "Comment" based on the data posted in the body 
         body = request.get_json()
@@ -35,6 +37,7 @@ class CommentListEndpoint(Resource):
         db.session.commit()
         return Response(json.dumps(comment.to_dict()), mimetype="application/json", status=201)
 
+    @flask_jwt_extended.jwt_required()
     def get(self):
         comments = Comment.query.filter(can_view_post(Comment.post_id, self.current_user))
 
@@ -51,10 +54,12 @@ class CommentListEndpoint(Resource):
         
 class CommentDetailEndpoint(Resource):
 
+    @flask_jwt_extended.jwt_required()
     def __init__(self, current_user):
         self.current_user = current_user
         self.user_ids = get_authorized_user_ids(self.current_user)
   
+    @flask_jwt_extended.jwt_required()
     def delete(self, id):
         # delete "Comment" record where "id"=id
         print(id)
@@ -67,7 +72,8 @@ class CommentDetailEndpoint(Resource):
             return Response(json.dumps({"message": "OK"}), mimetype="application/json", status=200)
 
         return Response(json.dumps({"message": "Forbidden"}), mimetype="application/json", status=404)
-
+    
+    @flask_jwt_extended.jwt_required()
     def get(self, id):
         # get "Comment" record where "id"=id
         comment = Comment.query.filter_by(id=id).first()
@@ -84,12 +90,12 @@ def initialize_routes(api):
         CommentListEndpoint, 
         '/api/comments', 
         '/api/comments/',
-        resource_class_kwargs={'current_user': api.app.current_user}
+        resource_class_kwargs={'current_user': flask_jwt_extended.current_user}
 
     )
     api.add_resource(
         CommentDetailEndpoint, 
         '/api/comments/<int:id>', 
         '/api/comments/<int:id>/',
-        resource_class_kwargs={'current_user': api.app.current_user}
+        resource_class_kwargs={'current_user': flask_jwt_extended.current_user}
     )
