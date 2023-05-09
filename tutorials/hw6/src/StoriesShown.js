@@ -52,8 +52,9 @@
 //  }
 
 import React, { useEffect, useState } from 'react';
-import StoriesShown from './StoriesShown';
+// import StoriesShown from './StoriesShown';
 import { getHeaders } from './utils';
+import Story from './Story';
 
 export default function Stories({ token }) {
   const [stories, setStories] = useState([]);
@@ -71,7 +72,9 @@ export default function Stories({ token }) {
 
   return (
     <div className="stories-container">
-      <StoriesShown stories={stories} />
+        {stories.map((story) => {
+         return <Story model={story}/>
+        })}
     </div>
   );
 }

@@ -21,7 +21,12 @@ export default function Post({post, token}) {
         // we need to set a state variable:
         setActualPost(data);
     }
-   
+   //make show comment function
+//    function showComment(){
+//     // if there are comments >0 return other wise none etc etc
+//     actualPost.comments
+//    }
+
     // JSX representation of a Post
     return (
         <section className="card">

@@ -5,6 +5,7 @@ import Suggestions from './Suggestions';
 import Posts from './Posts';
 import { useState, useEffect } from "react";
 import {getHeaders} from './utils';
+import Stories from './StoriesShown';
 
 
 export default function App ({token}) { 
@@ -40,7 +41,7 @@ export default function App ({token}) {
             </aside>
 
             <main>
-                {/* <Stories token={token} /> */}
+                <Stories token={token} />
                 <Posts token={token} />
             </main>
 

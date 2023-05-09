@@ -1,14 +1,44 @@
 // 2.A. Define statusToHTML here:
 
-const statusToHTML = () => {
-  document.querySelector('h1').innerHTML;
-  }
+function statusToHTML(statusObject){
+  const output = `<h1>${statusObject.screen_name}</h1>
+          <p>${statusObject.text}</p>
+          <button>More</button>`;
+
+
+          return `<h1>${statusObject.screen_name}</h1>
+          <p>${statusObject.text}</p>
+          <button>More</button>`;
+
+          return output;
+  // document.querySelector("body").innerHTML = output;
+}
+
+
+
 
 // 2.B. Define userToHTML here:
+function userToHTML(userObject){
 
-const userToHTML = () => {
-document.querySelector('h1').innerHTML;
+  if(userObject.verified == true){
+    Vname = `${userObject.name} <i class="fa-solid fa-circle-check"></i>`;
+  }else{
+    Vname = `${userObject.name}`;
+  }
+  // const output = `<img src="${userObject.profile_image_url}">
+  //                 <h1>${Vname}</h1>
+  //                 <p>Follower Count: ${userObject.followers_count}</p>
+  //                 <p>Friend Count: ${userObject.friends_count}</p>`;
+
+  // document.querySelector('body').innerHTML = output;
+
+  return `<img src="${userObject.profile_image_url}">
+                  <h1>${Vname}</h1>
+                  <p>Follower Count: ${userObject.followers_count}</p>
+                  <p>Friend Count: ${userObject.friends_count}</p>`;
 }
+
+
 
 
 
@@ -148,9 +178,9 @@ const userObj = {
 
 
 // uncomment this line when you've finished with Q2A:
- console.log("HTML representation of a status:", statusToHTML(statusObj));
+ //console.log("HTML representation of a status:", statusToHTML(statusObj));
 
 // uncomment this line when you've finished with Q2B:
- console.log("HTML representation of a verified user:", userToHTML(userObj));
- userObj.verified = false;
- console.log("HTML representation of an unverified user:", userToHTML(userObj));
+console.log("HTML representation of a verified user:", userToHTML(userObj));
+userObj.verified = false;
+console.log("HTML representation of an unverified user:", userToHTML(userObj));

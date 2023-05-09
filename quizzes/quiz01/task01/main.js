@@ -1,17 +1,19 @@
 // 1.A. Define getStatuses here:
 //      Sample endpoint: 
 //      https://www.apitutor.org/twitter/simple/1.1/search/tweets.json?q=cats&count=3 
-const getStatuses =async =>{
-    const rootURL = 'https://www.apitutor.org/twitter/simple/1.1/search/tweets.json?q=cats&count=3';
-    const endpoint = `${rootURL}?q=${term}&type=${type}&limit=${limit}`;
-    fetch(endpoint)
-        .then(response => response.json())
-        .then(jsonData => {
-            console.log(`Matches for ${term} + ${type}:`, jsonData);
-        });
- };
 
 
+const getStatuses = async (searchTerm,number) => {
+    const rootURL = 'https://www.apitutor.org/twitter/simple/1.1/search/tweets.json';
+    const endpoint = `${rootURL}?q=${searchTerm}&count=${number}`;
+    const response = await fetch(endpoint);
+    const jsonData = await response.json();
+    console.log(`Matches for ${searchTerm}:`, jsonData);
+
+    for(let i = 0; i < number; i++){
+        console.log(jsonData[i].text);
+    }
+}
 
 
 
@@ -20,16 +22,15 @@ const getStatuses =async =>{
 //      https://www.apitutor.org/twitter/1.1/users/show.json?screen_name=oprah
 
 
-const getUserDetails = async => {
-    const rootURL = 'https://www.apitutor.org/twitter/1.1/users/show.json?screen_name=oprah';
-    const endpoint = `${rootURL}?q=${term}&type=${type}&limit=${limit}`;
-    fetch(endpoint)
-        .then(response => response.json())
-        .then(jsonData => {
-            console.log(`Matches for ${term} + ${type}:`, jsonData);
-        });
- };
+const getUserDetails = async (username) => {
+    const rootURL = 'https://www.apitutor.org/twitter/1.1/users/show.json';
+    const endpoint = `${rootURL}?screen_name=${username}`;
+    const response = await fetch(endpoint);
+    const jsonData = await response.json();
+    console.log(`Matches for ${username}:`, jsonData);
 
+    console.log(username + "= " + jsonData.name );
+ };
 
 
 
@@ -63,9 +64,7 @@ const testGetUserDetails = async () => {
 }
 
 // uncomment this line when you've finished with Q1A:
- testGetStatuses() 
+testGetStatuses() 
 
 // uncomment this line when you've funished with Q1B:
 testGetUserDetails()
-
-
